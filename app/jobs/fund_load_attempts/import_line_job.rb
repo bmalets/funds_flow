@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module FundLoadAttempts
-  class ImportJob < ApplicationJob
+  class ImportLineJob < ApplicationJob
     sidekiq_options retry: false
 
     def perform(attempt_line, fund_load_attempts_import_id, line_number)

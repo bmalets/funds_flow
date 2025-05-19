@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe FundLoadAttemptImport do
+describe FundLoadAttemptsImport do
   context 'with attributes' do
     it { is_expected.to respond_to :status }
     it { is_expected.to respond_to :fund_load_attempts_count }
@@ -17,9 +17,9 @@ describe FundLoadAttemptImport do
 
     it {
       expect(fund_load_attempts_import).to define_enum_for(:status)
-                                             .with_values(pending: 'pending', failed: 'failed', created: 'created')
-                                             .backed_by_column_of_type(:enum)
-                                             .with_prefix(:status)
+        .with_values(pending: 'pending', failed: 'failed', created: 'created')
+        .backed_by_column_of_type(:enum)
+        .with_prefix(:status)
     }
   end
 end

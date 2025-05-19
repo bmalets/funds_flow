@@ -2,22 +2,18 @@
 
 module FundLoadAttempts
   module Adjudication
-    class DailyLimitCheckService < BaseService
-      DAILY_LIMIT_CENTS = 500000
-
-      def initialize(fund_load_attempt:)
-        @fund_load_attempt = fund_load_attempt
-      end
+    class WeeklyLimitCheckService < BaseCheckService
+      WEEKLY_LIMIT_CENTS = 2_000_000
 
       def call
-        @fund_load_attempt.amount_cents <= DAILY_LIMIT_CENTS && daily_total_cents <= DAILY_LIMIT_CENTS
+        @fund_load_attempt.amount_cents <= WEEKLY_LIMIT_CENTS && weekly_total_cents <= WEEKLY_LIMIT_CENTS
       end
 
       private
 
-      def daily_total_cents
+      def weekly_total_cents
         FundLoadAttempt.where(customer_id: @fund_load_attempt.customer_id,
-                              attempted_at: @fund_load_attempt.attempted_at.all_day)
+                              attempted_at: @fund_load_attempt.attempted_at.all_week)
                        .sum(:amount_cents)
       end
     end

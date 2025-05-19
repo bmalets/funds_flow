@@ -2,32 +2,45 @@
 
 module FundLoadAttempts
   module Adjudication
-    class PrimeIdCheckService < BaseCheckService
-      PRIME_DAILY_LIMIT_CENTS = 999900
-      PRIME_MAX_DAILY_ATTEMPTS_COUNT = 1
+    class MondayCheckService < BaseCheckService
+      INCREASE_COEFFICIENT = 2
 
       def call
-        prime_external_id? && valid_amount? && first_attempt?
+        return true unless @fund_load_attempt.attempted_at.monday?
+
+        daily_limit_not_reached? &&
+          weekly_limit_not_reached? &&
+          daily_attempts_count_not_reached? &&
+          passes_prime_id_sanctions?
       end
 
       private
 
-      def prime_external_id?
-        Prime.prime?(@fund_load_attempt.external_id)
+      def increased_amount_attempt
+        @increased_amount_attempt ||= FundLoadAttempt.new(customer_id: @fund_load_attempt.customer_id,
+                                                          attempted_at: @fund_load_attempt.attempted_at,
+                                                          external_id: @fund_load_attempt.external_id,
+                                                          amount_cents: increased_amount_cents)
       end
 
-      def valid_amount?
-        @fund_load_attempt.amount_cents <= PRIME_DAILY_LIMIT_CENTS
+      def increased_amount_cents
+        @fund_load_attempt.amount_cents * INCREASE_COEFFICIENT
       end
 
-      def first_attempt?
-        daily_total_count == PRIME_MAX_DAILY_ATTEMPTS_COUNT
+      def daily_limit_not_reached?
+        DailyLimitCheckService.call(fund_load_attempt: increased_amount_attempt)
       end
 
-      def daily_total_count
-        FundLoadAttempt.where(customer_id: @fund_load_attempt.customer_id,
-                              attempted_at: @fund_load_attempt.attempted_at.all_day)
-                       .count
+      def weekly_limit_not_reached?
+        WeeklyLimitCheckService.call(fund_load_attempt: increased_amount_attempt)
+      end
+
+      def daily_attempts_count_not_reached?
+        DailyCountCheckService.call(fund_load_attempt: increased_amount_attempt)
+      end
+
+      def passes_prime_id_sanctions?
+        PrimeIdCheckService.call(fund_load_attempt: increased_amount_attempt)
       end
     end
   end

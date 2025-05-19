@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module FundLoadAttempts
-  class ImportAllJob < ApplicationJob
+  class ImportFileJob < ApplicationJob
     sidekiq_options retry: 10
 
     def perform
@@ -33,7 +33,7 @@ module FundLoadAttempts
     end
 
     def fund_load_attempts_file
-      @fund_load_attempts_file ||= Rails.root.join(ENV.fetch('FUND_LOAD_ATTEMPTS_FILE_NAME'))
+      @fund_load_attempts_file ||= Rails.root.join(ENV.fetch('FUND_LOAD_ATTEMPTS_INPUT_FILE_NAME'))
     end
 
     def log_file_absence
@@ -41,7 +41,7 @@ module FundLoadAttempts
     end
 
     def import_line_job(line, line_number)
-      ImportJob.new(line, fund_load_attempts_import.id, line_number)
+      ImportLineJob.new(line, fund_load_attempts_import.id, line_number)
     end
   end
 end

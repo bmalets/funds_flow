@@ -1,0 +1,33 @@
+# Extensions
+plugins:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-factory_bot
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.4
+  NewCops: enable
+  Exclude:
+    - 'bin/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'log/*'
+    - 'public/**/*'
+    - 'storage/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+  SuggestExtensions: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
+
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Lint/MissingSuper:
+  Enabled: true

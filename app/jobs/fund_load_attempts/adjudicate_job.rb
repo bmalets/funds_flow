@@ -1,16 +1,45 @@
 # frozen_string_literal: true
 
 module FundLoadAttempts
-  class ImportJob < ApplicationJob
+  class AdjudicateJob < ApplicationJob
     sidekiq_options retry: false
 
-    def perform(attempt_line, line_number)
-      parsed_attempt_line = JSON.parse(attempt_line, symbolize_names: true)
-      fund_load_attempt = ImportService.call(attributes: parsed_attempt_line)
+    def perform(fund_load_attempt_id)
+      fund_load_attempt = FundLoadAttempt.includes(:fund_load_attempts_import)
+                                         .find_by(id: fund_load_attempt_id)
+      return unless fund_load_attempt
+
+      fund_load_attempts_import = fund_load_attempt.fund_load_attempts_import
+      return if fund_load_attempts_import.status_failed?
+
+      process_attempt(fund_load_attempt)
+      return unless import_finished?(fund_load_attempts_import)
+
+      fund_load_attempts_import.finish!
+      generate_report(fund_load_attempts_import)
+    end
+
+    private
+
+    def process_attempt(fund_load_attempt)
       AdjudicateService.call(fund_load_attempt:)
-    rescue JSON::ParseError => _e
-      Rails.logger.error("Invalid fund load attempt: #{attempt_line} at line #{line_number}")
-      raise
+    end
+
+    def import_finished?(fund_load_attempts_import)
+      all_attempts_count = fund_load_attempts_import.fund_load_attempts_count
+      processed_attempts_count = calculate_processed_attempts_count(fund_load_attempts_import)
+
+      all_attempts_count == processed_attempts_count
+    end
+
+    def calculate_processed_attempts_count(fund_load_attempts_import)
+      fund_load_attempts_import.fund_load_attempts
+                               .where.not(accepted: nil)
+                               .count
+    end
+
+    def generate_report(fund_load_attempts_import)
+      GenerateAdjudicateReportJob.perform_later(fund_load_attempts_import.id)
     end
   end
 end

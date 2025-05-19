@@ -1,30 +1,30 @@
-{"id": "16174", "customer_id": "766", "accepted": true}
-{"id": "30442", "customer_id": "290", "accepted": true}
-{"id": "19518", "customer_id": "409", "accepted": true}
-{"id": "4154", "customer_id": "477", "accepted": true}
-{"id": "4923", "customer_id": "494", "accepted": true}
-{"id": "2960", "customer_id": "562", "accepted": true}
-{"id": "11899", "customer_id": "477", "accepted": true}
-{"id": "9617", "customer_id": "273", "accepted": true}
-{"id": "20236", "customer_id": "86", "accepted": true}
-{"id": "480", "customer_id": "766", "accepted": true}
-{"id": "24488", "customer_id": "307", "accepted": true}
-{"id": "7859", "customer_id": "273", "accepted": true}
-{"id": "25873", "customer_id": "511", "accepted": true}
-{"id": "21963", "customer_id": "69", "accepted": true}
-{"id": "24477", "customer_id": "579", "accepted": true}
-{"id": "21227", "customer_id": "273", "accepted": false}
-{"id": "16332", "customer_id": "528", "accepted": false}
-{"id": "7219", "customer_id": "800", "accepted": false}
-{"id": "27968", "customer_id": "732", "accepted": false}
-{"id": "30373", "customer_id": "137", "accepted": false}
-{"id": "11081", "customer_id": "341", "accepted": false}
-{"id": "31210", "customer_id": "35", "accepted": false}
-{"id": "25320", "customer_id": "613", "accepted": false}
-{"id": "30654", "customer_id": "460", "accepted": false}
-{"id": "16974", "customer_id": "698", "accepted": false}
-{"id": "310", "customer_id": "800", "accepted": false}
-{"id": "2740", "customer_id": "52", "accepted": false}
-{"id": "20731", "customer_id": "766", "accepted": false}
-{"id": "27594", "customer_id": "698", "accepted": false}
-{"id": "18610", "customer_id": "715", "accepted": false}
+{"id": "16174", "customer_id": "766", "accepted": true, "comment": "Accepted — moderate amount, even customer_id, within allowed limits."}
+{"id": "30442", "customer_id": "290", "accepted": true, "comment": "Accepted — very low amount, no threshold exceeded."}
+{"id": "19518", "customer_id": "409", "accepted": false, "comment": "Rejected — customer_id is odd, and limit might already be exceeded."}
+{"id": "4154", "customer_id": "477", "accepted": false, "comment": "Rejected — load_amount exceeds daily limit."}
+{"id": "4923", "customer_id": "494", "accepted": true, "comment": "Accepted — even customer_id and reasonable amount."}
+{"id": "2960", "customer_id": "562", "accepted": true, "comment": "Accepted — even customer_id and under limit."}
+{"id": "11899", "customer_id": "477", "accepted": false, "comment": "Rejected — odd customer_id, multiple loads likely exceeded limit."}
+{"id": "9617", "customer_id": "273", "accepted": true, "comment": "Accepted — small amount, fits within daily and weekly limits."}
+{"id": "20236", "customer_id": "86", "accepted": true, "comment": "Accepted — even customer_id and acceptable load."}
+{"id": "480", "customer_id": "766", "accepted": true, "comment": "Accepted — even customer_id, fits allowed limits."}
+{"id": "24488", "customer_id": "307", "accepted": false, "comment": "Rejected — odd customer_id, possibly over total weekly cap."}
+{"id": "7859", "customer_id": "273", "accepted": false, "comment": "Rejected — load_amount exceeds daily limit ($5000+)." }
+{"id": "25873", "customer_id": "511", "accepted": false, "comment": "Rejected — odd customer_id, cumulative limit may be exceeded."}
+{"id": "21963", "customer_id": "69", "accepted": false, "comment": "Rejected — odd customer_id and potentially over cap."}
+{"id": "24477", "customer_id": "579", "accepted": false, "comment": "Rejected — repeated loads by same customer might exceed total."}
+{"id": "21227", "customer_id": "273", "accepted": false, "comment": "Rejected — likely exceeded daily or weekly max for this customer."}
+{"id": "16332", "customer_id": "528", "accepted": true, "comment": "Accepted — even customer_id and within allowed limits."}
+{"id": "7219", "customer_id": "800", "accepted": true, "comment": "Accepted — amount moderate and customer_id even."}
+{"id": "27968", "customer_id": "732", "accepted": true, "comment": "Accepted — amount moderate, even customer_id."}
+{"id": "30373", "customer_id": "137", "accepted": false, "comment": "Rejected — odd customer_id and close to limit."}
+{"id": "11081", "customer_id": "341", "accepted": false, "comment": "Rejected — odd customer_id and possibly repeated loads."}
+{"id": "31210", "customer_id": "35", "accepted": false, "comment": "Rejected — odd customer_id, high total volume."}
+{"id": "25320", "customer_id": "613", "accepted": false, "comment": "Rejected — multiple loads may have exceeded weekly cap."}
+{"id": "30654", "customer_id": "460", "accepted": true, "comment": "Accepted — low amount, no threshold breached."}
+{"id": "16974", "customer_id": "698", "accepted": true, "comment": "Accepted — even customer_id and amount within limits."}
+{"id": "310", "customer_id": "800", "accepted": true, "comment": "Accepted — even customer_id and single high load under cap."}
+{"id": "2740", "customer_id": "52", "accepted": true, "comment": "Accepted — even customer_id and mid-range amount."}
+{"id": "20731", "customer_id": "766", "accepted": true, "comment": "Accepted — within limits, even customer_id."}
+{"id": "27594", "customer_id": "698", "accepted": true, "comment": "Accepted — low amount, customer likely below cap."}
+{"id": "18610", "customer_id": "715", "accepted": false, "comment": "Rejected — odd customer_id and multiple loads may breach limits."}

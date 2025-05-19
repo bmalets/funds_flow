@@ -1,0 +1,30 @@
+{"id": "16174", "customer_id": "766", "load_amount": "$4112.37", "time": "2000-01-04T21:04:22Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "30442", "customer_id": "290", "load_amount": "$38.54", "time": "2000-01-28T18:51:04Z", "comment": "Low amount, likely accepted."}
+{"id": "19518", "customer_id": "409", "load_amount": "$1155.61", "time": "2000-02-02T09:18:40Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "4154", "customer_id": "477", "load_amount": "$5678.22", "time": "2000-01-03T07:13:48Z", "comment": "Exceeds daily limit, expected to be rejected."}
+{"id": "4923", "customer_id": "494", "load_amount": "$2912.53", "time": "2000-02-11T09:07:02Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "2960", "customer_id": "562", "load_amount": "$4469.40", "time": "2000-02-02T01:07:44Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "11899", "customer_id": "477", "load_amount": "$2173.77", "time": "2000-01-29T03:02:00Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "9617", "customer_id": "273", "load_amount": "$610.49", "time": "2000-02-11T02:58:50Z", "comment": "Low amount, likely accepted."}
+{"id": "20236", "customer_id": "86", "load_amount": "$3341.86", "time": "2000-02-03T13:56:56Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "480", "customer_id": "766", "load_amount": "$3677.17", "time": "2000-02-09T17:13:44Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "24488", "customer_id": "307", "load_amount": "$1274.85", "time": "2000-02-10T06:31:30Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "7859", "customer_id": "273", "load_amount": "$5998.67", "time": "2000-01-05T05:15:18Z", "comment": "Exceeds daily limit, expected to be rejected."}
+{"id": "25873", "customer_id": "511", "load_amount": "$2296.89", "time": "2000-01-21T20:08:18Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "21963", "customer_id": "69", "load_amount": "$1827.60", "time": "2000-01-14T10:10:30Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "24477", "customer_id": "579", "load_amount": "$1342.67", "time": "2000-01-06T01:42:38Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "21227", "customer_id": "273", "load_amount": "$3254.82", "time": "2000-01-25T11:04:28Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "16332", "customer_id": "528", "load_amount": "$3826.77", "time": "2000-01-06T10:54:56Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "7219", "customer_id": "800", "load_amount": "$2352.03", "time": "2000-02-06T14:33:58Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "27968", "customer_id": "732", "load_amount": "$4011.66", "time": "2000-01-03T09:16:32Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "30373", "customer_id": "137", "load_amount": "$3718.84", "time": "2000-01-29T12:14:18Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "11081", "customer_id": "341", "load_amount": "$2944.05", "time": "2000-01-05T22:38:32Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "31210", "customer_id": "35", "load_amount": "$4810.49", "time": "2000-01-28T04:31:56Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "25320", "customer_id": "613", "load_amount": "$3953.99", "time": "2000-01-03T21:32:56Z", "comment": "Odd customer_id with moderate amount, likely rejected."}
+{"id": "30654", "customer_id": "460", "load_amount": "$909.54", "time": "2000-01-21T06:50:32Z", "comment": "Low amount, likely accepted."}
+{"id": "16974", "customer_id": "698", "load_amount": "$4437.14", "time": "2000-02-01T02:37:40Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "310", "customer_id": "800", "load_amount": "$4984.08", "time": "2000-01-26T02:24:58Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "2740", "customer_id": "52", "load_amount": "$3669.57", "time": "2000-02-07T19:12:14Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "20731", "customer_id": "766", "load_amount": "$4169.11", "time": "2000-01-23T02:49:18Z", "comment": "Even customer_id, likely accepted for testing variety."}
+{"id": "27594", "customer_id": "698", "load_amount": "$981.72", "time": "2000-01-26T08:33:10Z", "comment": "Low amount, likely accepted."}
+{"id": "18610", "customer_id": "715", "load_amount": "$1523.55", "time": "2000-01-15T17:52:52Z", "comment": "Odd customer_id with moderate amount, likely rejected."}

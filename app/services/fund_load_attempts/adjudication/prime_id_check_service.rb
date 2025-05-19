@@ -2,20 +2,31 @@
 
 module FundLoadAttempts
   module Adjudication
-    class DailyCountCheckService < BaseService
-      MAX_DAILY_ATTEMPTS_COUNT = 3
-
-      def initialize(fund_load_attempt:)
-        @fund_load_attempt = fund_load_attempt
-      end
+    class PrimeIdCheckService < BaseCheckService
+      PRIME_DAILY_LIMIT_CENTS = 999_900
+      PRIME_MAX_DAILY_ATTEMPTS_COUNT = 1
 
       def call
-        daily_attempts_count <= MAX_DAILY_ATTEMPTS_COUNT
+        return true unless prime_external_id?
+
+        valid_amount? && first_attempt?
       end
 
       private
 
-      def daily_attempts_count
+      def prime_external_id?
+        Prime.prime?(@fund_load_attempt.external_id)
+      end
+
+      def valid_amount?
+        @fund_load_attempt.amount_cents <= PRIME_DAILY_LIMIT_CENTS
+      end
+
+      def first_attempt?
+        daily_total_count == PRIME_MAX_DAILY_ATTEMPTS_COUNT
+      end
+
+      def daily_total_count
         FundLoadAttempt.where(customer_id: @fund_load_attempt.customer_id,
                               attempted_at: @fund_load_attempt.attempted_at.all_day)
                        .count

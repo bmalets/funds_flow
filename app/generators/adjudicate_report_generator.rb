@@ -1,49 +1,44 @@
 # frozen_string_literal: true
 
-module FundLoadAttempts
-  class AdjudicateService < BaseService
-    def initialize(fund_load_attempt:)
-      @fund_load_attempt = fund_load_attempt
+class AdjudicateReportGenerator < BaseService
+  def initialize(fund_load_attempts_import:)
+    @fund_load_attempts_import = fund_load_attempts_import
+    super
+  end
+
+  def call
+    lines = prepare_lines
+
+    Rails.root.join(ENV.fetch('FUND_LOAD_ATTEMPTS_OUTPUT_FILE_NAME'))
+         .write(lines.join("\n"))
+  end
+
+  private
+
+  def prepare_lines
+    lines = []
+    collection.find_in_batches do |batch|
+      lines += batch.map { |record| format_line(record) }
     end
 
-    def call
-      @fund_load_attempt.update!(accepted: accepted?)
-    end
+    lines
+  end
 
-    private
+  def collection
+    @fund_load_attempts_import.fund_load_attempts
+                              .joins(:customer)
+                              .select(FundLoadAttempt.arel_table[:id],
+                                      FundLoadAttempt.arel_table[:external_id],
+                                      Customer.arel_table[:external_id].as('customer_external_id'),
+                                      FundLoadAttempt.arel_table[:accepted])
+                              .order(id: :asc)
+  end
 
-    def accepted?
-      daily_limit_not_reached? &&
-        weekly_limit_not_reached? &&
-        daily_attempts_count_not_reached? &&
-        # Special Sanctions check, Prime ID
-        passes_prime_id_sanctions? &&
-        # Special Sanctions check, Monday
-        monday_attempt? && passes_monday_sanctions?
-    end
-
-    def daily_limit_not_reached?
-      Adjudication::DailyLimitCheckService.call(fund_load_attempt: @fund_load_attempt)
-    end
-
-    def weekly_limit_not_reached?
-      Adjudication::WeeklyLimitCheckService.call(fund_load_attempt: @fund_load_attempt)
-    end
-
-    def daily_attempts_count_not_reached?
-      Adjudication::DailyCountCheckService.call(fund_load_attempt: @fund_load_attempt)
-    end
-
-    def passes_prime_id_sanctions?
-      Adjudication::PrimeIdCheckService.call(fund_load_attempt: @fund_load_attempt)
-    end
-
-    def monday_attempt?
-      @fund_load_attempt.attempted_at.monday?
-    end
-
-    def passes_monday_sanctions?
-      Adjudication::MondayCheckService.call(fund_load_attempt: @fund_load_attempt)
-    end
+  def format_line(record)
+    {
+      id: record.external_id.to_s,
+      customer_id: record.customer_external_id.to_s,
+      accepted: record.accepted
+    }.to_json
   end
 end
